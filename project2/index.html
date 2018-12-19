@@ -2,13 +2,65 @@
 <html>
 <head>
 <script>
-function validateForm() {
-  var x = document.querySelector("#name").value;
-  if (x == "") {
-    alert("Name must be filled out");
+  function validateForm() {
+    var nameForm = document.querySelector("#name").value;
+    var emailForm = document.querySelector("#email").value;
+    var sayisalForm = document.querySelector("#sayisal").value;
+    var basamakliForm = document.querySelector("#basamakli").value;
+    var alfaForm = document.querySelector("#alfa").value;
+    var max30Form = document.querySelector("#max30").value;
+    var uckelimeForm = document.querySelector("#uckelime").value;
+    var passwordForm = document.querySelector("#password").value;
+    if (nameForm == "") {
+      var nameOuter=document.querySelector("#name").outerHTML;
+      document.querySelector("#name").outerHTML="<span>"+nameOuter+"<span style='color:Red'>Boş olmamalı!</span></span>";
+      
+    }
+    if (emailForm == "" || emailForm.type!="email") {
+      var emailOuter=document.querySelector("#email").outerHTML;
+      document.querySelector("#email").outerHTML="<span>"+emailOuter+"<span style='color:Red'>(Kurallara uygun email)!</span></span>";
+    }
+    if (sayisalForm == "" || sayisalForm.type!="number") {
+      var sayisalOuter=document.querySelector("#sayisal").outerHTML;
+      document.querySelector("#sayisal").outerHTML="<span>"+sayisalOuter+"<span style='color:Red'>Sadece sayısal!</span></span>";
+    }
+    
+    
+    if (basamakliForm == "" || (basamakliForm.type!="number" && basamakli.length!=12) ) {
+      var basamakliOuter=document.querySelector("#basamakli").outerHTML;
+      document.querySelector("#basamakli").outerHTML="<span>"+basamakliOuter+"<span style='color:Red'>Sadece sayısal olan ve 12 basamak uzunluğundaki sayi:!</span></span>";
+      
+    }
+    
+    
+    if (alfaForm == "" || alfaForm.pattern!="[a-zA-Z-]+") {
+      var alfaOuter=document.querySelector("#alfa").outerHTML;
+      document.querySelector("#alfa").outerHTML="<span>"+alfaOuter+"<span style='color:Red'>Sadece harf (a..z veya A..Z): !</span></span>";
+      
+    }
+    
+   
+    if (max30Form == "" || (max30.pattern!="[a-zA-Z-]+"&& max30Form.length>30)) {
+      var max30Outer=document.querySelector("#max30").outerHTML;
+      document.querySelector("#max30").outerHTML="<span>"+max30Outer+"<span style='color:Red'>Sadece harf ve en fazla 30 uzunlukta olan string:!</span></span>";
+     
+    }
+    
+    if (uckelimeForm == "" ) {
+      var uckelimeOuter=document.querySelector("#uckelime").outerHTML;
+      document.querySelector("#uckelime").outerHTML="<span>"+uckelimeOuter+"<span style='color:Red'>3 kelimeden oluşan string:!</span></span>";
+      
+    }
+    
+     
+    if (passwordForm == "" || passwordForm.type!="password" || passwordForm.length>8 ) {
+      var passwordOuter=document.querySelector("#password").outerHTML;
+      document.querySelector("#password").outerHTML="<span>"+passwordOuter+"<span style='color:Red'>En az 1 büyük harf, en az 1 küçük harf, en az bir rakam ve en az 1 noktalama işareti içeren ve en az 8 uzunluğunda olan metin:!</span></span>";
+      
+    } 
     return false;
+     
   }
-}
 </script>
 </head>
 <body>
