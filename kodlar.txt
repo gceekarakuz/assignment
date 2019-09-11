@@ -1,0 +1,46 @@
+SELECT A.SEC_TYPE,     
+ (SELECT DATAVALUE      
+FROM TG.TDW_BAPARM      WHERE      
+ TYPE='FMSSORCD' AND       
+CODE = b.depot_code ) AS DEPO_TEXT ,     
+b.order_code,     a.ýsýn_code,     
+a.due_date,     b.folder_code,    
+ b.port_nom,     b.REPO_FORSALE_NOM,     b.depot_code , 
+TO_DATE(TO_CHAR(A.DUE_DATE),'dd.mm.yyyy') - TO_DATE(TO_CHAR(SYSDATE),'dd.mm.yyyy') AS KALAN_GUN FROM     
+tg.vdwýsýn a     LEFT JOIN tg.twx_vfmrskt b ON a.ýsýn_code = b.ýsýn_code  WHERE     
+b.depot_code ^= 'S'     AND   b.port_nom > 0     AND   a.due_date > 
+TO_DATE('01.08.2019','dd.mm.yyyy')    
+  AND   a.due_date <= TO_DATE('01.10.2020','dd.mm.yyyy')
+
+
+select  A.*
+(SELECT DATAVALUE
+FROM TG.TDW_BAPARM  
+WHERE
+TYPE='CRMCTYP' AND
+CODE = A.CURR_TYPE
+) AS CURR_TYPE
+from 
+PGARCDC. TBAEXCR A 
+WHERE CURR_DATE>TO_DATE('01.01.2019','dd.mm.yyyy') 
+order by CURR_DATE desc, curr_time desc
+
+
+select  * from 
+PGARCDC. TBAEXCR WHERE 
+CURR_DATE>TO_DATE('01.01.2019','dd.mm.yyyy') order by CURR_DATE desc, curr_time desc
+
+
+select  A.* ,
+( 
+SELECT DATAVALUE
+FROM PG.TDW_BAPARM  
+WHERE
+TYPE='CRMCTYPE' AND
+CODE = A.CURR_TYPE
+)
+A.CURR_TYPE AS XX
+from 
+PGARCDC. TBAEXCR A 
+WHERE CURR_DATE>TO_DATE('01.01.2019','dd.mm.yyyy') 
+order by CURR_DATE desc, curr_time desc
